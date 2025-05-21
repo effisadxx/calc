@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#openModalBtn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 40px;
+  font-size: 16px;
+  background: #E3010F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  width: 400px;
+}
+.modal-overlay {
+  display: flex;
+  width: 900px;
+  height: 931px;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.calculator-container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+.close-btn {
+  display: flex;
+  background: none;
+  border: none;
+  width: 30px;
+  cursor: pointer;
+}
+.gg {
+  display: flex;
+  justify-content: center;
+  gap: 220px;
+}
+.options-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin: 15px 0;
+}
+.option-card, .option-icon {
+  cursor: pointer;
+  transition: 0.3s;
+}
+.option-card:hover, .option-icon:hover {
+  border-color: #007bff;
+}
+.option-area {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.contact-section {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+body {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  font-family: "Open Sans", sans-serif;
+}
+.calculator-container {
+  width: 900px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  box-sizing: border-box;
+}
+h1 {
+  font-size: 32px;
+  color: #0C0C0C;
+  margin-bottom: 30px;
+  display: flex;
+}
+span {
+  color: #E3010F;
+  padding-left: 5px;
+}
+.section {
+  width: 810px;
+  display: flex;
+  padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  border: 1px solid #E4E4E4;
+  background: #FFF;
+  box-shadow: 0px 4px 25px 0px rgba(184, 184, 184, 0.25);
+}
+.section h2 {
+  color: #0C0C0C;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+}
+.option-card {
+  width: 160px;
+  height: 132px;
+  border-radius: 7px;
+  background: #FFF;
+  box-shadow: 0px 4px 25px 0px rgba(164, 164, 164, 0.24);
+}
+.option-card:hover {
+  transform: translateY(-5px);
+}
+.option-card p {
+  text-align: center;
+  color: #6F6F6F;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.radio-input:checked + .option-card {
+  border-radius: 7px;
+  background: #E3010F;
+  box-shadow: 0px 4px 25px 0px rgba(164, 164, 164, 0.24);
+}
+
+.section_2 {
+  display: flex;
+  width: 810px;
+  padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+  border-radius: 15px;
+  border: 1px solid #E4E4E4;
+  background: #FFF;
+  box-shadow: 0px 4px 25px 0px rgba(184, 184, 184, 0.25);
+}
+.option-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.option-icon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.option-icon.selected img {
+  border-radius: 70px;
+  background: #E3010F;
+  box-shadow: 0px 4px 25px 0px rgba(164, 164, 164, 0.24);
+}
+.option-icon img {
+  width: 70px;
+  height: 70px;
+}
+
+.option-icon p {
+  color: #6F6F6F;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.option-area {
+  padding: 15px 40px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #E3010F;
+  font-weight: bold;
+}
+
+.contact-section {
+  margin-top: 40px;
+  display: flex;
+  justify-content: start;
+  gap: 15px;
+}
+
+button {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  width: 240px;
+  height: 54px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#calculate-btn {
+  background-color: #E3010F;
+  color: white;
+}
+
+#calculate-btn:hover {
+  background-color: #E3010F;
+}
+
+#consult-btn {
+  background-color: white;
+  color: #0C0C0C;
+  border: 1px solid #0C0C0C;
+}
+
+#consult-btn:hover {
+  background-color: #333;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+label p {
+  color: #6F6F6F;
+  font-size: 12px;
+}
+svg circle, svg rect {
+  transition-duration: .2s;
+}
+input:checked + .angle circle{
+  fill: #E3010F;
+}
+input:checked + .angle rect{
+  fill: white;
+}
+.radio-input {
+  display: none;
+}
+.section_2 h2 {
+  color: #0C0C0C;
+  font-size: 16px;
+  font-weight: 600;
+}
+.section_2 {
+  margin-bottom: 30px;
+}
+
+.radio-input:checked + .option-area {
+  color: #fff;
+  background: #E3010F;
+}

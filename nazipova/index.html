@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Калькулятор кухни</title>
+    <link href="https://cdn.jsdelivr.net/gh/oathanrex/font-awesome-pro@main/fontawesome-pro-6.5.2-web/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button id="openModalBtn">Узнать цену вашей кухни</button>
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="calculator-container">
+        <div class="gg">
+          <h1>Узнайте цену <span> вашей кухни</span></h1>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="section">
+          <h2>Стиль:</h2>
+          <div class="options-row">
+            <label class="option-card" for="b1" data-value="До 5 м²" data-price="50000">
+              <input type="radio" id="b1" class="radio-input" name="b2">
+              <img src="images/img-1.png" alt="">
+              <p>Современный стиль</p>
+            </label>
+            <label class="option-card" for="b2" data-value="До 5 м²" data-price="50000">
+              <input type="radio" id="b2" class="radio-input" name="b2">
+              <img src="images/img-2.png" alt="">
+              <p>Современный стиль</p>
+            </label>
+            <label class="option-card" for="b3" data-value="До 5 м²" data-price="50000">
+              <input type="radio" id="b3" class="radio-input" name="b2">
+              <img src="images/img-3.png" alt="">
+              <p>Современный стиль</p>
+            </label>
+            <label class="option-card" for="b4" data-value="До 5 м²" data-price="50000">
+              <input type="radio" id="b4" class="radio-input" name="b2">
+              <img src="images/img-4.png" alt="">
+              <p>Современный стиль</p>
+            </label>
+          </div>
+        </div>
+
+        <div class="section_2">
+          <h2>Форма:</h2>
+          <div class="options-row">
+            <label for="r1">
+              <input type="radio" id="r1" class="radio-input" name="a1">
+              <svg width="70" height="70" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="angle">
+                <g filter="url(#filter0_d_1_30)">
+                <circle cx="60.5" cy="56" r="35" fill="white"/>
+                </g>
+                <rect x="76" y="54" width="4" height="29" rx="1" transform="rotate(90 76 54)" fill="#E3010F"/>
+                <defs>
+                <filter id="filter0_d_1_30" x="0.5" y="0" width="120" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="12.5"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0.24 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_30"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_30" result="shape"/>
+                </filter>
+                </defs>
+                </svg>
+              <p>Прямая кухня</p>
+            </label>
+            <label for="r2">
+              <input type="radio" id="r2" class="radio-input" name="a1">
+              <svg width="70" height="70" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="angle">
+                <g filter="url(#filter0_d_1_36)">
+                <circle cx="60.5" cy="56" r="35" fill="white"/>
+                </g>
+                <rect x="46" y="53" width="4" height="29" rx="1" transform="rotate(-90 46 53)" fill="#E3010F"/>
+                <rect x="46" y="49" width="4" height="14" rx="1" fill="#E3010F"/>
+                <defs>
+                <filter id="filter0_d_1_36" x="0.5" y="0" width="120" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="12.5"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0.24 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_36"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_36" result="shape"/>
+                </filter>
+                </defs>
+                </svg>
+              <p>Угловая кухня</p>
+            </label>
+            <label for="r3">
+              <input type="radio" id="r3" class="radio-input" name="a1">
+              <svg width="70" height="70" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="angle">
+                <g filter="url(#filter0_d_1_43)">
+                <circle cx="60" cy="56" r="35" fill="white"/>
+                </g>
+                <rect x="45" y="49" width="4" height="14" rx="1" fill="#E3010F"/>
+                <rect x="71" y="49" width="4" height="14" rx="1" fill="#E3010F"/>
+                <rect x="45" y="53" width="4" height="30" rx="1" transform="rotate(-90 45 53)" fill="#E3010F"/>
+                <defs>
+                <filter id="filter0_d_1_43" x="0" y="0" width="120" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="12.5"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0.24 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_43"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_43" result="shape"/>
+                </filter>
+                </defs>
+                </svg>
+                <p>П-образная кухня</p>
+            </label>
+            <label for="r4">
+              <input type="radio" id="r4" class="radio-input" name="a1">
+              <svg width="70" height="70" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="angle">
+                <g filter="url(#filter0_d_1_51)">
+                <circle cx="60.5" cy="56" r="35" fill="white"/>
+                </g>
+                <rect x="45.5" y="63" width="4" height="30" rx="1" transform="rotate(-90 45.5 63)" fill="#E3010F"/>
+                <rect x="45.5" y="53" width="4" height="30" rx="1" transform="rotate(-90 45.5 53)" fill="#E3010F"/>
+                <defs>
+                <filter id="filter0_d_1_51" x="0.5" y="0" width="120" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="12.5"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0.24 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_51"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_51" result="shape"/>
+                </filter>
+                </defs>
+                </svg>                
+                <p>Параллельная кухня</p>
+            </label>
+            <label for="r5">
+              <input type="radio" id="r5" class="radio-input" name="a1">
+              <svg width="70" height="70" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="angle">
+                <g filter="url(#filter0_d_1_58)">
+                <circle cx="60.5" cy="56" r="35" fill="white"/>
+                </g>
+                <rect x="45.5" y="63" width="4" height="19" rx="1" transform="rotate(-90 45.5 63)" fill="#E3010F"/>
+                <rect x="71.5" y="49" width="4" height="14" rx="1" fill="#E3010F"/>
+                <rect x="45.5" y="53" width="4" height="30" rx="1" transform="rotate(-90 45.5 53)" fill="#E3010F"/>
+                <defs>
+                <filter id="filter0_d_1_58" x="0.5" y="0" width="120" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="12.5"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0.24 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_58"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_58" result="shape"/>
+                </filter>
+                </defs>
+                </svg>
+                              
+                <p>Кухня с островом</p>
+            </label>
+            <label for="r6">
+              <input type="radio" id="r6" class="radio-input" name="a1">
+              <svg width="70" height="70" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="angle">
+                <g filter="url(#filter0_d_1_66)">
+                <circle cx="60" cy="56" r="35" fill="white"/>
+                </g>
+                <rect x="64.5" y="63" width="4" height="10" rx="1" transform="rotate(-90 64.5 63)" fill="#E3010F"/>
+                <rect x="49.5" y="63" width="4" height="14" rx="1" transform="rotate(180 49.5 63)" fill="#E3010F"/>
+                <rect x="72" y="49" width="4" height="14" rx="1" fill="#E3010F"/>
+                <rect x="46" y="53" width="4" height="30" rx="1" transform="rotate(-90 46 53)" fill="#E3010F"/>
+                <defs>
+                <filter id="filter0_d_1_66" x="0" y="0" width="120" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="12.5"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0 0.641667 0 0 0 0.24 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_66"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_66" result="shape"/>
+                </filter>
+                </defs>
+              </svg>
+                              
+                <p>Другие формы</p>
+            </label>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Площадь кухни:</h2>
+          <div class="options-row">
+            <label for="a1" data-value="До 5 м²" data-price="50000">
+              <input type="radio" id="a1" class="radio-input" name="a2">
+              <p class="option-area">До 5 м²</p>
+            </label>
+            <label for="a2" data-value="До 5 м²" data-price="50000">
+              <input type="radio" id="a2" class="radio-input" name="a2">
+              <p class="option-area">До 8 м²</p>
+            </label>
+            <label for="a3" data-value="До 5 м²" data-price="50000">
+              <input type="radio" id="a3" class="radio-input" name="a2">
+              <p class="option-area">До 15 м²</p>
+            </label>
+            <label for="a4" data-value="До 5 м²" data-price="50000" name="a2">
+              <input type="radio" id="a4" class="radio-input" name="a2">
+              <p class="option-area">Другое</p>
+            </label>
+          </div>
+        </div>
+        <div>
+          <p>
+            Оставьте свой номер телефона сейчас и наш <br> дизайнер свяжется с Вами в
+            ближайшее время!
+          </p>
+        </div>
+
+        <div class="contact-section">
+          <button id="calculate-btn">Рассчитать стоимость</button>
+          <button id="consult-btn">Номер телефона</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
