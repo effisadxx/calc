@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Калькулятор кредита на SPA-процедуры</title>
+<style>
+  :root {
+    --primary-color: #4a90e2;
+    --accent-color: #f5a623;
+    --bg-color: #f9fbfc;
+    --text-color: #333;
+    --border-radius: 8px;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    font-family: var(--font-family);
+    color: var(--text-color);
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  .calculator {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    max-width: 420px;
+    width: 100%;
+    padding: 2rem;
+  }
+
+  h1 {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  input[type="number"], select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border: 1.8px solid #ccc;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.25rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type="number"]:focus, select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #357ABD;
+  }
+
+  .result {
+    margin-top: 1.75rem;
+    background-color: #eaf4ff;
+    border-radius: var(--border-radius);
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    user-select: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    body {
+      padding: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <section class="calculator" aria-label="Калькулятор кредита на SPA-процедуры">
+    <h1>Кредит на SPA-процедуры</h1>
+    <form id="loanCalcForm" novalidate>
+      <label for="amount">Сумма кредита (₽)</label>
+      <input type="number" id="amount" name="amount" min="1000" max="500000" step="100" required placeholder="Введите сумму от 1 000 до 500 000" />
+
+      <label for="term">Срок кредита (месяцев)</label>
+      <select id="term" name="term" required>
+        <option value="" disabled selected>Выберите срок</option>
+        <option value="3">3 месяца</option>
+        <option value="6">6 месяцев</option>
+        <option value="9">9 месяцев</option>
+        <option value="12">12 месяцев</option>
+        <option value="18">18 месяцев</option>
+        <option value="24">24 месяца</option>
+      </select>
+
+      <label for="rate">Годовая ставка (%)</label>
+      <input type="number" id="rate" name="rate" min="1" max="30" step="0.1" required placeholder="Введите процентную ставку" />
+
+      <button type="submit" aria-label="Рассчитать платеж">Рассчитать</button>
+    </form>
+    <div id="result" class="result" aria-live="polite" role="region" hidden></div>
+  </section>
+
+<script>
+  (() => {
+    const form = document.getElementById('loanCalcForm');
+    const resultEl = document.getElementById('result');
+
+    /**
+     * Рассчитать ежемесячный платеж по аннуитетной схеме
+     * @param {number} principal - сумма кредита
+     * @param {number} annualRatePercent - годовая ставка в процентах
+     * @param {number} months - срок кредита в месяцах
+     * @returns {number} ежемесячный платеж
+     */
+    function calculateMonthlyPayment(principal, annualRatePercent, months) {
+      const monthlyRate = annualRatePercent / 100 / 12;
+      if (monthlyRate === 0) return principal / months;
+      // Формула аннуитетного платежа
+      return principal * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)));
+    }
+
+    /**
+     * Форматировать число в денежный формат ₽ с разделителями
+     * @param {number} value 
+     * @returns {string}
+     */
+    function formatCurrency(value) {
+      return value.toLocaleString('ru-RU', {
+        style: 'currency',
+        currency: 'RUB',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      });
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      // Сбор данных
+      const principal = parseFloat(form.amount.value);
+      const term = parseInt(form.term.value, 10);
+      const annualRate = parseFloat(form.rate.value);
+
+      // Валидация
+      if (isNaN(principal) || principal < 1000 || principal > 500000) {
+        resultEl.hidden = false;
+        resultEl.textContent = 'Ошибка: Сумма кредита должна быть от 1 000 до 500 000 ₽.';
+        return;
+      }
+      if (isNaN(term) || term <= 0) {
+        resultEl.hidden = false;
+        resultEl.textContent = 'Ошибка: Пожалуйста, выберите срок кредита.';
+        return;
+      }
+      if (isNaN(annualRate) || annualRate < 1 || annualRate > 30) {
+        resultEl.hidden = false;
+        resultEl.textContent = 'Ошибка: Процентная ставка должна быть от 1% до 30%.';
+        return;
+      }
+
+      // Расчет платежей
+      const monthlyPayment = calculateMonthlyPayment(principal, annualRate, term);
+      const totalPayment = monthlyPayment * term;
+      const totalInterest = totalPayment - principal;
+
+      // Вывод результата
+      resultEl.hidden = false;
+      resultEl.innerHTML = `
+        <p>Ежемесячный платеж: <strong>${formatCurrency(monthlyPayment)}</strong></p>
+        <p>Общая сумма выплат: <strong>${formatCurrency(totalPayment)}</strong></p>
+        <p>Переплата по кредиту: <strong>${formatCurrency(totalInterest)}</strong></p>
+      `;
+    });
+  })();
+</script>
+</body>
+</html>
