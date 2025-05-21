@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Калькулятор стоимости ремонта</title>
+<style>
+  :root {
+    --color-primary: #2f80ed;
+    --color-secondary: #56ccf2;
+    --color-bg: #f5f7fa;
+    --color-text: #333;
+    --input-border: #ccc;
+    --input-focus-border: var(--color-primary);
+    --shadow: rgba(0, 0, 0, 0.1);
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    font-family: var(--font-family);
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  .calculator {
+    background: #fff;
+    width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--shadow);
+    padding: 2rem;
+  }
+  h1 {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    text-align: center;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1.2rem;
+    border: 1.8px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type="number"]:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 6px var(--color-secondary);
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .row > div {
+    flex: 1;
+  }
+  button {
+    width: 100%;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+  button:hover,
+  button:focus {
+    background: var(--color-secondary);
+  }
+  .result {
+    margin-top: 1.8rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    border-top: 2px solid var(--color-primary);
+    padding-top: 1rem;
+    color: var(--color-primary);
+    user-select: text;
+  }
+  /* Responsive */
+  @media (max-width: 460px) {
+    .calculator {
+      width: 100%;
+      padding: 1.5rem;
+    }
+    .row {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+  <section class="calculator" aria-label="Калькулятор стоимости ремонта">
+    <h1>Калькулятор стоимости ремонта</h1>
+    <form id="repairCalc" novalidate>
+      <label for="area">Площадь ремонта (м²)</label>
+      <input
+        type="number"
+        id="area"
+        name="area"
+        min="1"
+        max="10000"
+        step="0.1"
+        placeholder="Введите площадь"
+        required
+        aria-describedby="areaHelp"
+      />
+      <small id="areaHelp" style="color:#777; font-size:0.8rem; margin-top:-1rem; margin-bottom:1rem; display:block;">От 1 до 10 000 м²</small>
+
+      <label for="type">Тип ремонта</label>
+      <select id="type" name="type" required aria-describedby="typeHelp">
+        <option value="" disabled selected>Выберите тип</option>
+        <option value="cosmetic">Косметический</option>
+        <option value="capital">Капитальный</option>
+        <option value="euro">Евро-ремонт</option>
+      </select>
+      <small id="typeHelp" style="color:#777; font-size:0.8rem; margin-top:-1rem; margin-bottom:1rem; display:block;">Влияет на базовую ставку</small>
+
+      <div class="row">
+        <div>
+          <label for="materials">Качество материалов</label>
+          <select id="materials" name="materials" required aria-describedby="materialsHelp">
+            <option value="" disabled selected>Выберите качество</option>
+            <option value="budget">Бюджетные</option>
+            <option value="standard">Стандартные</option>
+            <option value="premium">Премиум</option>
+          </select>
+          <small id="materialsHelp" style="color:#777; font-size:0.8rem; margin-top:-1rem; margin-bottom:1rem; display:block;">Влияет на коэффициент стоимости</small>
+        </div>
+        <div>
+          <label for="time">Срок выполнения (дней)</label>
+          <input
+            type="number"
+            id="time"
+            name="time"
+            min="1"
+            max="365"
+            placeholder="Введите сроки"
+            required
+            aria-describedby="timeHelp"
+          />
+          <small id="timeHelp" style="color:#777; font-size:0.8rem; margin-top:-1rem; margin-bottom:1rem; display:block;">Срок влияет на итоговую цену</small>
+        </div>
+      </div>
+
+      <button type="submit" aria-label="Рассчитать стоимость ремонта">Рассчитать</button>
+    </form>
+    <div class="result" role="region" aria-live="polite" id="result" tabindex="0"></div>
+  </section>
+
+<script>
+(() => {
+  const form = document.getElementById('repairCalc');
+  const resultEl = document.getElementById('result');
+
+  /**
+   * Базовые ставки за м² по типу ремонта (в рублях)
+   */
+  const baseRates = {
+    cosmetic: 1500,
+    capital: 3000,
+    euro: 5500,
+  };
+
+  /**
+   * Коэффициенты качества материалов
+   */
+  const materialCoeffs = {
+    budget: 0.8,
+    standard: 1,
+    premium: 1.4,
+  };
+
+  /**
+   * Функция расчета коэффициента срочности
+   * Чем меньше дней, тем выше коэффициент на цену
+   * Минимальный срок - 1 день, максимальный - 365
+   * Коэффициент варьируется от 1 (максимальный срок) до 1.5 (минимальный срок)
+   */
+  function urgencyCoefficient(days) {
+    const minDays = 1;
+    const maxDays = 365;
+    const maxCoeff = 1.5;
+    const minCoeff = 1;
+    if (days <= minDays) return maxCoeff;
+    if (days >= maxDays) return minCoeff;
+    // Линейная интерполяция
+    return (
+      maxCoeff -
+      ((days - minDays) / (maxDays - minDays)) * (maxCoeff - minCoeff)
+    );
+  }
+
+  /**
+   * Форматирует число в денежный формат с разделителем тысяч
+   * @param {number} n
+   * @returns {string}
+   */
+  function formatCurrency(n) {
+    return n.toLocaleString('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+  }
+
+  /**
+   * Валидация полей формы
+   * @param {HTMLFormElement} form
+   * @returns {boolean}
+   */
+  function validateForm(form) {
+    let valid = true;
+
+    // Проверяем площадь
+    const area = form.area;
+    if (!area.value || area.value <= 0 || area.value > 10000) {
+      area.setCustomValidity('Введите корректную площадь от 1 до 10 000 м²');
+      valid = false;
+    } else {
+      area.setCustomValidity('');
+    }
+
+    // Проверяем тип ремонта
+    const type = form.type;
+    if (!type.value) {
+      type.setCustomValidity('Выберите тип ремонта');
+      valid = false;
+    } else {
+      type.setCustomValidity('');
+    }
+
+    // Проверяем качество материалов
+    const mat = form.materials;
+    if (!mat.value) {
+      mat.setCustomValidity('Выберите качество материалов');
+      valid = false;
+    } else {
+      mat.setCustomValidity('');
+    }
+
+    // Проверяем сроки
+    const time = form.time;
+    if (!time.value || time.value < 1 || time.value > 365) {
+      time.setCustomValidity('Введите корректный срок от 1 до 365 дней');
+      valid = false;
+    } else {
+      time.setCustomValidity('');
+    }
+
+    form.reportValidity();
+    return valid;
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!validateForm(form)) {
+      resultEl.textContent = '';
+      return;
+    }
+
+    const area = parseFloat(form.area.value);
+    const type = form.type.value;
+    const materials = form.materials.value;
+    const time = parseInt(form.time.value, 10);
+
+    // Получаем базовую ставку
+    const baseRate = baseRates[type];
+    // Коэффициент материалов
+    const matCoeff = materialCoeffs[materials];
+    // Коэффициент срочности
+    const urgencyCoeff = urgencyCoefficient(time);
+
+    // Итоговая стоимость
+    const cost = area * baseRate * matCoeff * urgencyCoeff;
+
+    // Вывод с форматированием
+    resultEl.textContent = `Ориентировочная стоимость ремонта: ${formatCurrency(cost)}`;
+  });
+})();
+</script>
+</body>
+</html>
